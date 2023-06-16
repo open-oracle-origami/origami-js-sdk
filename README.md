@@ -19,7 +19,7 @@ yarn add @open-oracle-origami/origami-js-sdk
 ## Usage
 
 ```ts
-import { Curator, Origami } from '@open-oracle-origami/origami-js-sdk';
+import { Curator, Origami } from '@open-oracle-origami/origami-js-sdk'
 
 const origami = new Origami()
 

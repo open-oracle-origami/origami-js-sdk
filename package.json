@@ -31,15 +31,15 @@
     "node": ">=18.0"
   },
   "keywords": [
-    "boilerplate",
-    "template",
-    "typescript",
-    "vscode",
-    "jest",
-    "husky",
-    "commitizen",
-    "semantic-release",
-    "codecov"
+    "open",
+    "oracle",
+    "origami",
+    "sdk",
+    "curator",
+    "operator",
+    "web3",
+    "decentralized",
+    "blockchain"
   ],
   "bugs": {
     "url": "https://github.com/OpenOracleOrigami/origami-js-sdk/issues"
@@ -65,6 +65,10 @@
     "ts-jest": "^29.1.0",
     "ts-node": "^10.2.1",
     "typescript": "^5.0.4"
+  },
+  "peerDependencies": {
+    "@types/superagent": "*",
+    "superagent": "*"
   },
   "config": {
     "commitizen": {
