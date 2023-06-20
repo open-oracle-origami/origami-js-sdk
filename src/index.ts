@@ -1,1 +1,4 @@
-export const myPackage = (taco = ''): string => `${taco} from my package`
+export { default as Curator } from './Curator'
+export { default as Workshop } from './Workshop'
+export * from './interfaces'
+export * from './mills'

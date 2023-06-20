@@ -6467,6 +6467,9 @@ __metadata:
     ts-jest: ^29.1.0
     ts-node: ^10.2.1
     typescript: ^5.0.4
+  peerDependencies:
+    "@types/superagent": "*"
+    superagent: "*"
   languageName: unknown
   linkType: soft
 
