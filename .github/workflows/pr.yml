@@ -2,8 +2,7 @@
 # https://github.com/ryansonshine/ryansonshine/blob/main/.github/workflows/pr.yml
 name: Pull Request
 
-on:
-  workflow_call:
+on: [pull_request]
 
 jobs:
   build:
