@@ -1,7 +1,5 @@
-import { IMill } from '../interfaces'
-
 type Paper = {
-  mill: IMill
+  mill: any
   data: object
   created: number
 }

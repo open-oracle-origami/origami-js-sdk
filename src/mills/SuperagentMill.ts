@@ -1,3 +1,4 @@
+// TODO: Fix this whole file
 import { EventEmitter } from 'node:events'
 
 // @ts-ignore
@@ -5,7 +6,6 @@ import agent from 'superagent'
 // @ts-ignore
 import { request as SuperAgent } from '@types/superagent'
 
-import { IMill } from '../interfaces'
 import { Paper } from '../types'
 
 type AgentOrUrl = string | SuperAgent
@@ -18,7 +18,7 @@ type SuperagentMillConfig = {
   auto?: boolean
 }
 
-class SuperagentMill extends EventEmitter implements IMill {
+class SuperagentMill extends EventEmitter {
   name: string
   failures: number
   agent: () => SuperAgent
