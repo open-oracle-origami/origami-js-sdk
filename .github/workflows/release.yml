@@ -2,11 +2,9 @@
 # https://github.com/ryansonshine/ryansonshine/blob/main/.github/workflows/release.yml
 name: Release
 on:
-  workflow_call:
-    secrets:
-      NPM_TOKEN:
-        required: true
-
+  push:
+    branches:
+      - main
 jobs:
   release:
     name: Release
