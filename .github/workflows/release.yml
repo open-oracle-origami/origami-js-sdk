@@ -1,6 +1,8 @@
 # Reusable workflow for releases ejected from:
 # https://github.com/ryansonshine/ryansonshine/blob/main/.github/workflows/release.yml
 name: Release
+permissions:
+  contents: write
 on:
   push:
     branches:
