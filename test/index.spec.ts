@@ -11,3 +11,8 @@
 //     });
 //   });
 // });
+describe('index', () => {
+  test('must run', () => {
+    expect(true).toBeTruthy()
+  })
+})
