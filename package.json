@@ -1,5 +1,5 @@
 {
-  "name": "origami-js-sdk",
+  "name": "@open-oracle-origami/origami-js-sdk",
   "version": "0.0.0-development",
   "description": "Open Oracle Origami Node JS SDK",
   "main": "./lib/index.js",
@@ -19,7 +19,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/OpenOracleOrigami/origami-js-sdk.git"
+    "url": "git+https://github.com/open-oracle-origami/origami-js-sdk.git"
   },
   "license": "MIT",
   "author": {
