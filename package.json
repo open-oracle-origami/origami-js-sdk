@@ -43,9 +43,9 @@
     "blockchain"
   ],
   "bugs": {
-    "url": "https://github.com/OpenOracleOrigami/origami-js-sdk/issues"
+    "url": "https://github.com/open-oracle-origami/origami-js-sdk/issues"
   },
-  "homepage": "https://github.com/OpenOracleOrigami/origami-js-sdk#readme",
+  "homepage": "https://github.com/open-oracle-origami/origami-js-sdk#readme",
   "devDependencies": {
     "@ryansonshine/commitizen": "^4.2.8",
     "@ryansonshine/cz-conventional-changelog": "^3.3.4",
