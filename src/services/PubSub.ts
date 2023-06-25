@@ -46,3 +46,5 @@ export class PubSub {
     return this.adapter.unsubscribe(topic)
   }
 }
+
+export default PubSub
