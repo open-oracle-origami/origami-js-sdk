@@ -1,4 +1,6 @@
-export { default as Curator } from './Curator'
-export { default as BaseMill } from './BaseMill'
-export { default as BaseMuseum } from './BaseMuseum'
-export { default as PubSub } from './services/PubSub'
+import Curator from './Curator'
+import BaseMill from './BaseMill'
+import BaseMuseum from './BaseMuseum'
+import PubSub from './services/PubSub'
+
+export { Curator, BaseMill, BaseMuseum, PubSub }
