@@ -1,13 +1,13 @@
-import Workshop from './Workshop'
 import { IPubSub, PubSub } from './services/PubSub'
 import BaseMill from './BaseMill'
 import BaseMuseum from './BaseMuseum'
+import BaseWorkshop from './BaseWorkshop'
 
 // TODO: Configure app level ability to report on curator process's to foundation or custom (prometheus?)
 // TODO: Collab consensus
 
 class Curator {
-  workshops: Workshop[] = []
+  workshops: BaseWorkshop[] = []
   mills: BaseMill[] = []
   museums: BaseMuseum[] = []
   daemon: NodeJS.Timer | null
@@ -18,12 +18,6 @@ class Curator {
     // @ts-ignore
     this.emitter = new PubSub()
   }
-
-  //addWorkshop = (workshop: Workshop): this => {
-  //  this.workshops.push(workshop)
-  //
-  //  return this
-  //}
 
   addMill = (MillClass: typeof BaseMill, options?: object): this => {
     const mill = new MillClass({ ...(options ?? {}) })
@@ -39,6 +33,18 @@ class Curator {
     museum.setEmitter(this.emitter)
 
     this.museums.push(museum)
+
+    return this
+  }
+
+  addWorkshop = (
+    WorkshopClass: typeof BaseWorkshop,
+    options?: object
+  ): this => {
+    const workshop = new WorkshopClass({ ...(options ?? {}) })
+    workshop.setEmitter(this.emitter)
+
+    this.workshops.push(workshop)
 
     return this
   }
