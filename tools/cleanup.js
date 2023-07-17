@@ -1,11 +1,15 @@
 /* eslint-disable */
-const fs = require('fs')
-const Path = require('path')
+import fs from 'fs'
+import Path from 'path'
+import { fileURLToPath } from 'url'
 /* eslint-enable */
 
-const deleteFolderRecursive = (path) => {
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = Path.dirname(__filename)
+
+const deleteFolderRecursive = path => {
   if (fs.existsSync(path)) {
-    fs.readdirSync(path).forEach((file) => {
+    fs.readdirSync(path).forEach(file => {
       const curPath = Path.join(path, file)
       if (fs.lstatSync(curPath).isDirectory()) {
         deleteFolderRecursive(curPath)

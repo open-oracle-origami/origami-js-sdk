@@ -1,5 +1,5 @@
 {
-  "extends": "../tsconfig",
+  "extends": "../tsconfig.build.json",
   "compilerOptions": {
     "target": "ESNext",
     "module": "NodeNext" /* Specify module code generation: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', or 'ESNext'. */,
