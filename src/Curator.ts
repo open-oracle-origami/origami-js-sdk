@@ -1,81 +1,71 @@
-import { IPubSub, PubSub } from './services/PubSub'
-import BaseMill from './BaseMill'
-import BaseMuseum from './BaseMuseum'
-import BaseWorkshop from './BaseWorkshop'
+import Run from './Run'
+import { IResource, CuratorConfig, SyncOrAsyncFn } from './types'
+import { IMill, IMuseum, IWorkshop } from './interfaces'
 
-// TODO: Configure app level ability to report on curator process's to foundation or custom (prometheus?)
-// TODO: Collab consensus
+class Curator extends Run {
+  mills: IMill[] = []
+  museums: IMuseum[] = []
+  workshops: IWorkshop[] = []
 
-class Curator {
-  workshops: BaseWorkshop[] = []
-  mills: BaseMill[] = []
-  museums: BaseMuseum[] = []
-  daemon: NodeJS.Timer | null
-  emitter: IPubSub
+  defaultInit = async (): Promise<SyncOrAsyncFn<void>> => {
+    const daemon = setInterval(() => {}, 1 << 30)
 
-  constructor() {
-    this.daemon = null
-    // @ts-ignore
-    this.emitter = new PubSub()
-  }
-
-  addMill = (MillClass: typeof BaseMill, options?: object): this => {
-    const mill = new MillClass({ ...(options ?? {}) })
-    mill.setEmitter(this.emitter)
-
-    this.mills.push(mill)
-
-    return this
-  }
-
-  addMuseum = (MuseumClass: typeof BaseMuseum, options?: object): this => {
-    const museum = new MuseumClass({ ...(options ?? {}) })
-    museum.setEmitter(this.emitter)
-
-    this.museums.push(museum)
-
-    return this
-  }
-
-  addWorkshop = (
-    WorkshopClass: typeof BaseWorkshop,
-    options?: object
-  ): this => {
-    const workshop = new WorkshopClass({ ...(options ?? {}) })
-    workshop.setEmitter(this.emitter)
-
-    this.workshops.push(workshop)
-
-    return this
-  }
-
-  start = async (): Promise<this> => {
     await Promise.all(
       [...this.mills, ...this.workshops, ...this.museums].map(item =>
         item.start()
       )
     )
 
-    this.emitter.publish('curator', 'starting')
-
-    // this will keep daemon alive forever
-    this.daemon = setInterval(() => {
-      // TODO: do something
-    }, 1 << 30)
+    this.emitter.publish(this.id, 'start')
 
     console.info(
       '折 お り 紙 がみ (origami), from 折 お り (ori, “to fold”) + 紙 かみ (kami, “paper“)'
     )
-    return this
+
+    return async (): Promise<void> => {
+      this.emitter.publish(this.id, 'stop')
+
+      await Promise.all(
+        [...this.mills, ...this.workshops, ...this.museums].map(item =>
+          item.stop()
+        )
+      )
+
+      clearInterval(daemon)
+    }
   }
 
-  stop() {
-    // await Promise.all(this.workshops.map(workshop => workshop.stop))
-    this.emitter.publish('curator', 'stopping')
+  constructor(config: CuratorConfig) {
+    super(config)
+    const { id, mills, museums, workshops } = config
+    this.id = `curator.${id.replace('curator.', '')}`
+    this.init ??= this.defaultInit
 
-    // TODO: does not trigger
-    // Process finished with exit code 130 (interrupted by signal 2: SIGINT)
-    if (this.daemon) clearInterval(this.daemon)
+    if (mills) this.mills = mills
+    if (museums) this.museums = museums
+    if (workshops) this.workshops = workshops
+  }
+
+  plan(C: IResource, config?: object): this
+  plan(C: new (config: object) => IResource, config: object): this
+  plan(
+    C: IResource | (new (config: object) => IResource),
+    config: object | undefined
+  ): this {
+    const c =
+      typeof C === 'function' ? new C({ emitter: this.emitter, ...config }) : C
+
+    if (this.running && !c.running) void c.start()
+
+    if (c.id.includes('mill')) {
+      this.mills.push(c as IMill)
+    } else if (c.id.includes('museum')) {
+      this.museums.push(c as IMuseum)
+    } else if (c.id.includes('workshop')) {
+      this.workshops.push(c as IWorkshop)
+    } else {
+      throw new Error(`${c.id} is not a Mill, Museum, or Workshop`)
+    }
 
     return this
   }

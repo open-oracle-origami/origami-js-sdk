@@ -1,7 +1,15 @@
 import Curator from './Curator'
-import BaseMill from './BaseMill'
-import BaseMuseum from './BaseMuseum'
-import BaseWorkshop from './BaseWorkshop'
-import PubSub from './services/PubSub'
+import Mill from './Mill'
+import Museum from './Museum'
+import Workshop from './Workshop'
 
-export { Curator, BaseMill, BaseMuseum, BaseWorkshop, PubSub }
+export { Curator, Mill, Museum, Workshop }
+export { PubSub } from './services/PubSub'
+export { IPubSub, IRun, IMill, IMuseum, IWorkshop } from './interfaces'
+export {
+  Paper,
+  Origami,
+  MillConfig,
+  MuseumConfig,
+  WorkshopConfig,
+} from './types'

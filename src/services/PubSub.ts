@@ -1,12 +1,7 @@
 import PubSubJs from 'pubsub-js'
 
-type SubscriptionListener<T> = (topic: string, data?: T) => void
-
-export interface IPubSub {
-  publish: (topic: string, data: string | object) => void
-  subscribe: (topic: string, callback: SubscriptionListener<any>) => void
-  unsubscribe: (topic: string) => void
-}
+import { IPubSub } from '../interfaces'
+import { SubscriptionListener } from '../types'
 
 export class MemoryAdapter implements IPubSub {
   publish = (topic: string, data: any) => {
@@ -22,17 +17,14 @@ export class MemoryAdapter implements IPubSub {
   }
 }
 
-export class PubSub {
+export class PubSub implements IPubSub {
   adapter: IPubSub
 
-  constructor() {
-    this.adapter = new MemoryAdapter()
+  constructor(
+    { adapter }: { adapter: IPubSub } = { adapter: new MemoryAdapter() }
+  ) {
+    this.adapter = adapter
   }
-
-  // TODO: Lets allow for switchable adapters and make it more typesafe
-  // setAdapter = (adapter: IPubSub) => {
-  //   this.adapter = adapter
-  // }
 
   publish = (topic: string, data: string | object) => {
     return this.adapter.publish(topic, data)
