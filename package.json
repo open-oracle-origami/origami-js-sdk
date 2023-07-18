@@ -1,7 +1,7 @@
 {
   "private": false,
   "name": "@open-oracle-origami/origami-js-sdk",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "Open Oracle Origami Node JS SDK",
   "main": "./dist/cjs/index.js",
   "types": "./dist/types/index.d.js",

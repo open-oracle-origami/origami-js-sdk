@@ -8,7 +8,7 @@ class Workshop extends Run implements IWorkshop {
   mills: string[]
   backlog: number = 10000
   stack: Paper[] = []
-  assembly?: (mill: string, paper: Paper) => void
+  assemble?: (mill: string, paper: Paper) => void
   crease?: (paper: Paper) => Paper
 
   defaultInit = (): SyncOrAsyncFn<void> => {
@@ -17,7 +17,7 @@ class Workshop extends Run implements IWorkshop {
         const creased = this.crease ? this.crease(paper) : paper
         const length = this.stack.unshift(creased)
         if (length > this.backlog) this.stack.pop()
-        if (this.assembly) this.assembly(topic, creased)
+        if (this.assemble) this.assemble(topic, creased)
       })
     })
 
@@ -28,19 +28,21 @@ class Workshop extends Run implements IWorkshop {
 
   constructor(config: WorkshopConfig) {
     super(config)
-    const { id, mills, assembly, crease, backlog } = config
+    const { id, mills, assemble, crease, backlog } = config
     this.id = `workshop.${id.replace('workshop.', '')}`
     this.init ??= this.defaultInit
 
     this.mills = mills
-    if (assembly) this.assembly = assembly
+    if (assemble) this.assemble = assemble
     if (crease) this.crease = crease
     if (backlog) this.backlog = backlog
   }
 
-  fold = (collection: string, data: any): this => {
+  fold = (collection: string, assembly: Paper[], data: any): this => {
     const origami: Origami = {
+      workshop: this.id,
       collection,
+      assembly,
       data,
       timestamp: DateTime.utc(),
     }
