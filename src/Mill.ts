@@ -11,11 +11,16 @@ class Mill extends Run implements IMill {
     this.id = `mill.${id.replace('mill.', '')}`
   }
 
-  press = (data: any): this => {
+  press = (
+    sku: string,
+    data: any,
+    timestamp: DateTime = DateTime.utc()
+  ): this => {
     const paper: Paper = {
       mill: this.id,
+      sku,
       data,
-      timestamp: DateTime.utc(),
+      timestamp,
     }
 
     this.emitter.publish(this.id, paper)

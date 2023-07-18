@@ -1,3 +1,4 @@
+import { DateTime } from 'luxon'
 import { Paper, SubscriptionListener, SyncOrAsyncFn } from '../types'
 
 export interface IPubSub {
@@ -17,7 +18,7 @@ export interface IRun {
 }
 
 export interface IMill extends IRun {
-  press: (data: any) => this
+  press: (sku: string, data: any, timestamp: DateTime) => this
 }
 
 export interface IMuseum extends IRun {
@@ -28,7 +29,7 @@ export interface IWorkshop extends IRun {
   mills: string[]
   backlog: number
   stack: Paper[]
-  fold: (collection: string, data: any) => this
-  assembly?: (mill: string, paper: Paper) => void
+  fold: (collection: string, assembly: Paper[], data: any) => this
+  assemble?: (mill: string, paper: Paper) => void
   crease?: (paper: Paper) => Paper
 }

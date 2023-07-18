@@ -29,7 +29,7 @@ export type MuseumConfig = RunConfig & {
 
 export type WorkshopConfig = RunConfig & {
   mills: string[]
-  assembly?: (mill: string, paper: Paper) => void
+  assemble?: (mill: string, paper: Paper) => void
   crease?: (paper: Paper) => Paper
   backlog?: number
 }
@@ -38,12 +38,15 @@ export type IResource = IMill | IMuseum | IWorkshop
 
 export type Paper = {
   mill: string
+  sku: string
   data: any
   timestamp: DateTime
 }
 
 export type Origami = {
+  workshop: string
   collection: string
+  assembly: Paper[]
   data: any
   timestamp: DateTime
 }
