@@ -1,5 +1,10 @@
 import { DateTime } from 'luxon'
-import { Paper, SubscriptionListener, SyncOrAsyncFn } from '../types'
+import {
+  Paper,
+  SubscriptionListener,
+  SyncOrAsyncFn,
+  InitCallbackFn,
+} from '../types'
 
 export interface IPubSub {
   publish: (topic: string, data: string | object) => void
@@ -13,8 +18,8 @@ export interface IRun {
   running: boolean
   start: SyncOrAsyncFn<this>
   stop: SyncOrAsyncFn<this>
-  init?: SyncOrAsyncFn<SyncOrAsyncFn<void>>
-  end?: SyncOrAsyncFn<void>
+  init?: InitCallbackFn<InitCallbackFn<void>>
+  end?: InitCallbackFn<void>
 }
 
 export interface IMill extends IRun {
