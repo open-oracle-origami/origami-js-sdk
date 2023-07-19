@@ -1,5 +1,3 @@
-import { DateTime } from 'luxon'
-
 import Run from './Run'
 import { Paper, Origami, WorkshopConfig, SyncOrAsyncFn } from './types'
 import { IWorkshop } from './interfaces'
@@ -44,7 +42,7 @@ class Workshop extends Run implements IWorkshop {
       collection,
       assembly,
       data,
-      timestamp: DateTime.utc(),
+      timestamp: Date.now(),
     }
 
     this.emitter.publish(this.id, origami)

@@ -55,12 +55,10 @@
   },
   "homepage": "https://github.com/open-oracle-origami/origami-js-sdk#readme",
   "dependencies": {
-    "luxon": "^3.3.0",
     "pubsub-js": "^1.9.4"
   },
   "devDependencies": {
     "@types/jest": "^29.5.3",
-    "@types/luxon": "^3.3.0",
     "@types/node": "^20.4.2",
     "@types/pubsub-js": "^1.8.3",
     "@types/ws": "^8.5.5",

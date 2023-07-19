@@ -1,5 +1,3 @@
-import { DateTime } from 'luxon'
-
 import { IRun, IMill, IMuseum, IWorkshop, IPubSub } from '../interfaces'
 
 export type SyncOrAsyncFn<ReturnType> =
@@ -44,7 +42,7 @@ export type Paper = {
   mill: string
   sku: string
   data: any
-  timestamp: DateTime
+  timestamp: number
 }
 
 export type Origami = {
@@ -52,5 +50,5 @@ export type Origami = {
   collection: string
   assembly: Paper[]
   data: any
-  timestamp: DateTime
+  timestamp: number
 }

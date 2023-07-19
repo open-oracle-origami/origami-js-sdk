@@ -1,4 +1,3 @@
-import { DateTime } from 'luxon'
 import {
   Paper,
   SubscriptionListener,
@@ -23,7 +22,7 @@ export interface IRun {
 }
 
 export interface IMill extends IRun {
-  press: (sku: string, data: any, timestamp: DateTime) => this
+  press: (sku: string, data: any, timestamp: number) => this
 }
 
 export interface IMuseum extends IRun {
