@@ -1,13 +1,18 @@
 import { IRun, IMill, IMuseum, IWorkshop, IPubSub } from '../interfaces'
 
+export type SubscriptionListener<T> = (topic: string, data?: T) => void
+
 export type SyncOrAsyncFn<ReturnType> =
   | (() => Promise<ReturnType>)
   | (() => ReturnType)
-export type SubscriptionListener<T> = (topic: string, data?: T) => void
 
 export type InitCallbackFn<ReturnType> =
   | ((i: IRun) => Promise<ReturnType>)
   | ((i: IRun) => ReturnType)
+
+export type RunStartFn =
+  | ((listener?: SubscriptionListener<any>) => Promise<void>)
+  | ((listener?: SubscriptionListener<any>) => void)
 
 export type RunConfig = {
   id: string

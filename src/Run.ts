@@ -1,6 +1,6 @@
 import { PubSub } from './services/PubSub'
 import { IPubSub, IRun } from './interfaces'
-import { RunConfig, InitCallbackFn } from './types'
+import { RunConfig, InitCallbackFn, SubscriptionListener } from './types'
 
 class Run implements IRun {
   id: string
@@ -8,6 +8,7 @@ class Run implements IRun {
   running = false
   init?: InitCallbackFn<InitCallbackFn<void>>
   end?: InitCallbackFn<void>
+  listener?: SubscriptionListener<any>
 
   constructor({ id, emitter = new PubSub(), init }: RunConfig) {
     this.id = `ns.${id.replace('ns.', '')}`
@@ -15,10 +16,16 @@ class Run implements IRun {
     this.init = init
   }
 
-  start = async (): Promise<this> => {
+  start = async (listener?: SubscriptionListener<any>): Promise<this> => {
     if (this.running) return this
 
     this.running = true
+
+    if (listener) {
+      this.listener = listener
+      this.emitter.subscribe(this.id, this.listener)
+    }
+
     if (this.init) this.end = await this.init(this)
 
     return this
@@ -28,6 +35,7 @@ class Run implements IRun {
     if (!this.running) return this
 
     this.running = false
+    if (this.listener) this.emitter.unsubscribe(this.id)
     if (this.end) await this.end(this)
 
     return this

@@ -3,6 +3,7 @@ import {
   SubscriptionListener,
   SyncOrAsyncFn,
   InitCallbackFn,
+  RunStartFn,
 } from '../types'
 
 export interface IPubSub {
@@ -15,10 +16,11 @@ export interface IRun {
   id: string
   emitter: IPubSub
   running: boolean
-  start: SyncOrAsyncFn<this>
+  start: RunStartFn
   stop: SyncOrAsyncFn<this>
   init?: InitCallbackFn<InitCallbackFn<void>>
   end?: InitCallbackFn<void>
+  listener?: SubscriptionListener<any>
 }
 
 export interface IMill extends IRun {
