@@ -22,7 +22,7 @@ export interface IRun {
 }
 
 export interface IMill extends IRun {
-  press: (sku: string, data: any, timestamp: number) => this
+  press: (sku: string, data: any, timestamp?: number) => this
 }
 
 export interface IMuseum extends IRun {
