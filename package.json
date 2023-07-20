@@ -1,6 +1,6 @@
 {
   "name": "@open-oracle-origami/origami-js-sdk",
-  "version": "0.0.0",
+  "version": "0.0.0-alpha",
   "private": false,
   "description": "Open Oracle Origami Node JS SDK",
   "keywords": [
@@ -61,7 +61,7 @@
   },
   "release": {
     "branches": [
-      "main"
+      "main", "alpha"
     ],
     "plugins": [
       [
