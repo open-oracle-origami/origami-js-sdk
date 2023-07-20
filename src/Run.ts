@@ -1,13 +1,13 @@
 import { PubSub } from './services/PubSub'
 import { IPubSub, IRun } from './interfaces'
-import { RunConfig, InitCallbackFn, SubscriptionListener } from './types'
+import { RunConfig, InitFn, CallbackFn, SubscriptionListener } from './types'
 
 class Run implements IRun {
   id: string
   emitter: IPubSub
   running = false
-  init?: InitCallbackFn<InitCallbackFn<void>>
-  end?: InitCallbackFn<void>
+  init?: InitFn
+  end?: CallbackFn<void>
   listener?: SubscriptionListener<any>
 
   constructor({ id, emitter = new PubSub(), init }: RunConfig) {

@@ -2,7 +2,8 @@ import {
   Paper,
   SubscriptionListener,
   SyncOrAsyncFn,
-  InitCallbackFn,
+  InitFn,
+  CallbackFn,
   RunStartFn,
 } from '../types'
 
@@ -18,8 +19,8 @@ export interface IRun {
   running: boolean
   start: RunStartFn
   stop: SyncOrAsyncFn<this>
-  init?: InitCallbackFn<InitCallbackFn<void>>
-  end?: InitCallbackFn<void>
+  init?: InitFn
+  end?: CallbackFn<void>
   listener?: SubscriptionListener<any>
 }
 

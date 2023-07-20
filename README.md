@@ -1,4 +1,8 @@
-# origami-js-sdk
+# Open Oracle Origami JS SDK
+
+Building blockchain oracles never gets better.
+
+---
 
 [![npm package][npm-img]][npm-url]
 [![Build Status][build-img]][build-url]
@@ -8,9 +12,6 @@
 [![Commitizen Friendly][commitizen-img]][commitizen-url]
 [![Semantic Release][semantic-release-img]][semantic-release-url]
 
-> Open Oracle Origami Node JS SDK
-
-# Open Oracle Origami 
 ## Any form, any shape. Web3’s modular open oracle.
  Open Oracle Origami (OOO) believes that building and deploying an oracle for blockchain shouldn’t be rocket science. Our end goal is to allow expedient development of blockchain oracles while providing a myriad of oracle solutions to the world. The ideology is simple, based around composability and themed around the world of origami, its creation and viewership. 
 
@@ -70,35 +71,28 @@ Curator.curate(origami)
 - **Flexible Integration**: Seamlessly integrate Open Oracle Origami with various blockchain platforms and protocols.
 - **Developer-Friendly SDKs**: Provide easy-to-use SDKs for developers to interact with the oracle network.
 
-
 ## Contributing
-
 Contributions are always welcome! Our source code is licensed under the MIT License, and contributions are welcome.
 
-See `contributing.md` for ways to get started.
+See [contributing](https://github.com/open-oracle-origami/origami-js-sdk/blob/main/CONTRIBUTING.md) for ways to get started.
 
-Please adhere to this project's `code of conduct`.
-
+Please adhere to our [code of conduct](https://github.com/open-oracle-origami/origami-js-sdk/blob/main/CODE_OF_CONDUCT.md).
 
 ## License
-
 [MIT](https://choosealicense.com/licenses/mit/)
-
-
-
 
 More Documentation coming soon...
 
-[build-img]:https://github.com/OpenOracleOrigami/origami-js-sdk/actions/workflows/release.yml/badge.svg
-[build-url]:https://github.com/OpenOracleOrigami/origami-js-sdk/actions/workflows/release.yml
-[downloads-img]:https://img.shields.io/npm/dt/typescript-npm-package-template
-[downloads-url]:https://www.npmtrends.com/typescript-npm-package-template
-[npm-img]:https://img.shields.io/npm/v/typescript-npm-package-template
-[npm-url]:https://www.npmjs.com/package/typescript-npm-package-template
-[issues-img]:https://img.shields.io/github/issues/ryansonshine/typescript-npm-package-template
-[issues-url]:https://github.com/OpenOracleOrigami/origami-js-sdk/issues
-[codecov-img]:https://codecov.io/gh/OpenOracleOrigami/origami-js-sdk/branch/main/graph/badge.svg
-[codecov-url]:https://codecov.io/gh/OpenOracleOrigami/origami-js-sdk
+[build-img]:https://github.com/open-oracle-origami/origami-js-sdk/actions/workflows/release.yml/badge.svg
+[build-url]:https://github.com/open-oracle-origami/origami-js-sdk/actions/workflows/release.yml
+[downloads-img]:https://img.shields.io/npm/dt/@open-oracle-origami/origami-js-sdk
+[downloads-url]:https://npmtrends.com/@open-oracle-origami/origami-js-sdk
+[npm-img]:https://img.shields.io/npm/v/@open-oracle-origami/origami-js-sdk
+[npm-url]:https://www.npmjs.com/package/@open-oracle-origami/origami-js-sdk
+[issues-img]:https://img.shields.io/github/issues/open-oracle-origami/origami-js-sdk
+[issues-url]:https://github.com/open-oracle-origami/origami-js-sdk/issues
+[codecov-img]:https://codecov.io/gh/open-oracle-origami/origami-js-sdk/branch/main/graph/badge.svg
+[codecov-url]:https://codecov.io/gh/open-oracle-origami/origami-js-sdk
 [semantic-release-img]:https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg
 [semantic-release-url]:https://github.com/semantic-release/semantic-release
 [commitizen-img]:https://img.shields.io/badge/commitizen-friendly-brightgreen.svg

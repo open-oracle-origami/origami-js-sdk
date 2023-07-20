@@ -1,14 +1,17 @@
-import { IRun, IMill, IMuseum, IWorkshop, IPubSub } from '../interfaces'
+import { IMill, IMuseum, IWorkshop, IPubSub } from '../interfaces'
 
+export type IResource = IMill | IMuseum | IWorkshop
 export type SubscriptionListener<T> = (topic: string, data?: T) => void
 
 export type SyncOrAsyncFn<ReturnType> =
   | (() => Promise<ReturnType>)
   | (() => ReturnType)
 
-export type InitCallbackFn<ReturnType> =
-  | ((i: IRun) => Promise<ReturnType>)
-  | ((i: IRun) => ReturnType)
+export type CallbackFn<ReturnType> =
+  | ((...args: any[]) => Promise<ReturnType>)
+  | ((...args: any[]) => ReturnType)
+
+export type InitFn = CallbackFn<CallbackFn<void>>
 
 export type RunStartFn =
   | ((listener?: SubscriptionListener<any>) => Promise<void>)
@@ -17,7 +20,7 @@ export type RunStartFn =
 export type RunConfig = {
   id: string
   emitter?: IPubSub
-  init?: SyncOrAsyncFn<SyncOrAsyncFn<void>>
+  init?: InitFn
 }
 
 export type CuratorConfig = RunConfig & {
@@ -40,8 +43,6 @@ export type WorkshopConfig = RunConfig & {
   crease?: (paper: Paper) => Paper
   backlog?: number
 }
-
-export type IResource = IMill | IMuseum | IWorkshop
 
 export type Paper = {
   mill: string
