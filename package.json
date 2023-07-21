@@ -44,10 +44,9 @@
   ],
   "scripts": {
     "build": "npm run build:cjs && npm run build:esm && npm run build:types",
-    "build:cjs": "npm run clean cjs && tsc -p config/tsconfig.cjs.json",
-    "build:esm": "npm run clean esm && tsc -p config/tsconfig.esm.json",
-    "build:types": "npm run clean types && tsc -p config/tsconfig.types.json",
-    "clean": "node tools/cleanup",
+    "build:cjs": "rm -rf ./dist/cjs && tsc -p config/tsconfig.cjs.json",
+    "build:esm": "rm -rf ./dist/esm && tsc -p config/tsconfig.esm.json",
+    "build:types": "rm -rf ./dist/types && tsc -p config/tsconfig.types.json",
     "cm": "cz",
     "lint": "eslint jest.config.ts ./src/ ./test/ --fix",
     "package": "npm run build && cp package.json dist/package.json && npm pack",
