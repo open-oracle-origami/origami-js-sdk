@@ -1,8 +1,9 @@
 {
   "extends": "../tsconfig.build.json",
   "compilerOptions": {
-    "target": "ESNext",
-    "module": "NodeNext" /* Specify module code generation: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', or 'ESNext'. */,
+    "lib": ["es2023"],
+    "module": "Node16",
+    "target": "es2022",
     "outDir": "../dist/esm" /* Redirect output structure to the directory. */
   }
 }
