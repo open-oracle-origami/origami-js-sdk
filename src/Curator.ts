@@ -1,11 +1,15 @@
 import Run from './Run'
-import { IResource, CuratorConfig, SyncOrAsyncFn } from './types'
+import { Resource, IResource, CuratorConfig, SyncOrAsyncFn } from './types'
 import { IMill, IMuseum, IWorkshop } from './interfaces'
 
 class Curator extends Run {
   mills: IMill[] = []
   museums: IMuseum[] = []
   workshops: IWorkshop[] = []
+
+  static create(config: CuratorConfig): Curator {
+    return new this(config)
+  }
 
   defaultInit = async (): Promise<SyncOrAsyncFn<void>> => {
     const daemon = setInterval(() => {}, 1 << 30)
@@ -36,9 +40,8 @@ class Curator extends Run {
   }
 
   constructor(config: CuratorConfig) {
-    super(config)
-    const { id, mills, museums, workshops } = config
-    this.id = `curator.${id.replace('curator.', '')}`
+    super({ ...config, id: `curator.${config.id.replace('curator.', '')}` })
+    const { mills, museums, workshops } = config
     this.init ??= this.defaultInit
 
     if (mills) this.mills = mills
@@ -47,9 +50,9 @@ class Curator extends Run {
   }
 
   plan(C: IResource, config?: object): this
-  plan(C: new (config: object) => IResource, config: object): this
+  plan(C: new (config: object) => Resource, config: object): this
   plan(
-    C: IResource | (new (config: object) => IResource),
+    C: IResource | (new (config: object) => Resource),
     config: object | undefined
   ): this {
     const c =

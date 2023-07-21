@@ -3,10 +3,15 @@ import { Paper, MillConfig } from './types'
 import { IMill } from './interfaces'
 
 class Mill extends Run implements IMill {
+  static create(config: MillConfig): IMill {
+    return new this(config) as IMill
+  }
+
   constructor(config: MillConfig) {
-    super(config)
-    const { id } = config
-    this.id = `mill.${id.replace('mill.', '')}`
+    super({
+      ...config,
+      id: `mill.${config.id.replace('mill.', '')}`,
+    })
   }
 
   press = (sku: string, data: any, timestamp: number = Date.now()): this => {

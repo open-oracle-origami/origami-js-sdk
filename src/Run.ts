@@ -3,12 +3,16 @@ import { IPubSub, IRun } from './interfaces'
 import { RunConfig, InitFn, CallbackFn, SubscriptionListener } from './types'
 
 class Run implements IRun {
-  id: string
-  emitter: IPubSub
+  readonly id: string
+  readonly emitter: IPubSub
   running = false
   init?: InitFn
   end?: CallbackFn<void>
   listener?: SubscriptionListener<any>
+
+  static create(config: RunConfig): IRun {
+    return new this(config) as IRun
+  }
 
   constructor({ id, emitter = new PubSub(), init }: RunConfig) {
     this.id = `ns.${id.replace('ns.', '')}`

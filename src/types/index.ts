@@ -1,5 +1,7 @@
+import { Mill, Museum, Workshop } from '../'
 import { IMill, IMuseum, IWorkshop, IPubSub } from '../interfaces'
 
+export type Resource = Mill | Museum | Workshop
 export type IResource = IMill | IMuseum | IWorkshop
 export type SubscriptionListener<T> = (topic: string, data?: T) => void
 
@@ -29,9 +31,7 @@ export type CuratorConfig = RunConfig & {
   workshops?: IWorkshop[]
 }
 
-export type MillConfig = RunConfig & {
-  placeholder?: string
-}
+export type MillConfig = RunConfig
 
 export type MuseumConfig = RunConfig & {
   workshops: string[]

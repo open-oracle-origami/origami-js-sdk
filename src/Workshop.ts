@@ -9,6 +9,10 @@ class Workshop extends Run implements IWorkshop {
   assemble?: (mill: string, paper: Paper) => void
   crease?: (paper: Paper) => Paper
 
+  static create(config: WorkshopConfig): IWorkshop {
+    return new this(config) as IWorkshop
+  }
+
   defaultInit = (): SyncOrAsyncFn<void> => {
     this.mills.forEach(mill => {
       this.emitter.subscribe(mill, (topic, paper: Paper) => {
@@ -25,9 +29,8 @@ class Workshop extends Run implements IWorkshop {
   }
 
   constructor(config: WorkshopConfig) {
-    super(config)
-    const { id, mills, assemble, crease, backlog } = config
-    this.id = `workshop.${id.replace('workshop.', '')}`
+    super({ ...config, id: `workshop.${config.id.replace('workshop.', '')}` })
+    const { mills, assemble, crease, backlog } = config
     this.init ??= this.defaultInit
 
     this.mills = mills

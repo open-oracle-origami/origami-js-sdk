@@ -5,10 +5,13 @@ import { MuseumConfig } from './types'
 class Museum extends Run implements IMuseum {
   workshops: string[]
 
+  static create(config: MuseumConfig): IMuseum {
+    return new this(config) as IMuseum
+  }
+
   constructor(config: MuseumConfig) {
-    super(config)
-    const { id, workshops } = config
-    this.id = `museum.${id.replace('museum.', '')}`
+    super({ ...config, id: `museum.${config.id.replace('museum.', '')}` })
+    const { workshops } = config
     this.workshops = workshops
   }
 }

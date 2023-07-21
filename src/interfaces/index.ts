@@ -14,8 +14,8 @@ export interface IPubSub {
 }
 
 export interface IRun {
-  id: string
-  emitter: IPubSub
+  readonly id: string
+  readonly emitter: IPubSub
   running: boolean
   start: RunStartFn
   stop: SyncOrAsyncFn<this>
