@@ -67,7 +67,11 @@
   "release": {
     "branches": [
       "main",
-      {"name": "alpha", "channel": "alpha", "prerelease": "alpha"}
+      {
+        "name": "alpha",
+        "channel": "alpha",
+        "prerelease": "alpha"
+      }
     ],
     "plugins": [
       [
@@ -114,6 +118,9 @@
     "pubsub-js": "^1.9.4"
   },
   "devDependencies": {
+    "@tsconfig/esm": "^1.0.4",
+    "@tsconfig/node18": "^18.2.0",
+    "@tsconfig/recommended": "^1.0.2",
     "@types/jest": "^29.5.3",
     "@types/node": "^20.4.2",
     "@types/pubsub-js": "^1.8.3",

@@ -1,9 +1,8 @@
 {
-  "extends": "../tsconfig.build.json",
+  "extends": ["../tsconfig.build.json", "@tsconfig/esm/tsconfig"],
   "compilerOptions": {
-    "lib": ["es2023"],
-    "module": "Node16",
-    "target": "es2022",
-    "outDir": "../dist/esm" /* Redirect output structure to the directory. */
+    "moduleResolution": "node",
+    "outDir": "../dist/esm",
+    "verbatimModuleSyntax": false,
   }
 }
