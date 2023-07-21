@@ -1,6 +1,7 @@
 {
   "extends": ["../tsconfig.build.json", "@tsconfig/esm/tsconfig"],
   "compilerOptions": {
+    "declaration": true,
     "moduleResolution": "node",
     "outDir": "../dist/esm",
     "verbatimModuleSyntax": false,
