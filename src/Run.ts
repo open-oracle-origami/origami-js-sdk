@@ -15,7 +15,7 @@ class Run implements IRun {
   }
 
   constructor({ id, emitter = new PubSub(), init }: RunConfig) {
-    this.id = `ns.${id.replace('ns.', '')}`
+    this.id = id
     this.emitter = emitter
     this.init = init
   }
