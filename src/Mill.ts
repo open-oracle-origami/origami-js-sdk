@@ -1,6 +1,7 @@
 import Run from './Run'
 import { Paper, MillConfig } from './types'
 import { IMill } from './interfaces'
+import { now } from './utils'
 
 class Mill extends Run implements IMill {
   static create(config: MillConfig): IMill {
@@ -14,7 +15,7 @@ class Mill extends Run implements IMill {
     })
   }
 
-  press = (sku: string, data: any, timestamp: number = Date.now()): this => {
+  press = (sku: string, data: any, timestamp: number = now()): this => {
     const paper: Paper = {
       mill: this.id,
       sku,

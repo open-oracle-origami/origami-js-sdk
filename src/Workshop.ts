@@ -1,6 +1,7 @@
 import Run from './Run'
 import { Paper, Origami, WorkshopConfig, SyncOrAsyncFn } from './types'
 import { IWorkshop } from './interfaces'
+import { now } from './utils'
 
 class Workshop extends Run implements IWorkshop {
   mills: string[]
@@ -45,7 +46,7 @@ class Workshop extends Run implements IWorkshop {
       collection,
       assembly,
       data,
-      timestamp: Date.now(),
+      timestamp: now(),
     }
 
     this.emitter.publish(this.id, origami)
