@@ -1,6 +1,6 @@
 export * from './types'
 export * from './interfaces'
-export * from './utils'
+export * as utils from './utils'
 import Curator from './Curator'
 import Mill from './Mill'
 import Museum from './Museum'
