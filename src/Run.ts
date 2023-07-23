@@ -4,7 +4,7 @@ import { RunConfig, InitFn, CallbackFn, SubscriptionListener } from './types'
 
 class Run implements IRun {
   readonly id: string
-  readonly emitter: IPubSub
+  emitter: IPubSub
   running = false
   init?: InitFn
   end?: CallbackFn<void>
@@ -41,6 +41,12 @@ class Run implements IRun {
     this.running = false
     if (this.listener) this.emitter.unsubscribe(this.id)
     if (this.end) await this.end(this)
+
+    return this
+  }
+
+  assign = ({ emitter }: RunConfig): this => {
+    if (emitter) this.emitter = emitter
 
     return this
   }

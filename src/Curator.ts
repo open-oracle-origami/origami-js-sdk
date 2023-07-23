@@ -51,14 +51,30 @@ class Curator extends Run {
 
   plan(C: IResource, config?: object): this
   plan(C: new (config: object) => Resource, config: object): this
+  plan(C: (config: object) => Resource, config: object): this
   plan(
-    C: IResource | (new (config: object) => Resource),
+    C:
+      | IResource
+      | (new (config: object) => Resource)
+      | ((config: object) => Resource),
     config: object | undefined
   ): this {
-    const c =
-      typeof C === 'function' ? new C({ emitter: this.emitter, ...config }) : C
+    let c: IResource
 
-    if (this.running && !c.running) void c.start()
+    if ('id' in C) {
+      c = C
+      c.assign(this)
+    } else {
+      const nextConfig = { emitter: this.emitter, ...config }
+
+      try {
+        // @ts-ignore
+        c = new C(nextConfig)
+      } catch {
+        // @ts-ignore
+        c = C(nextConfig)
+      }
+    }
 
     if (c.id.includes('mill')) {
       this.mills.push(c as IMill)
@@ -69,6 +85,8 @@ class Curator extends Run {
     } else {
       throw new Error(`${c.id} is not a Mill, Museum, or Workshop`)
     }
+
+    if (this.running && !c.running) void c.start()
 
     return this
   }

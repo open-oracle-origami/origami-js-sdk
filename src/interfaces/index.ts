@@ -5,6 +5,7 @@ import {
   InitFn,
   CallbackFn,
   RunStartFn,
+  RunConfig,
 } from '../types'
 
 export interface IPubSub {
@@ -19,6 +20,7 @@ export interface IRun {
   running: boolean
   start: RunStartFn
   stop: SyncOrAsyncFn<this>
+  assign: (object: RunConfig) => this
   init?: InitFn
   end?: CallbackFn<void>
   listener?: SubscriptionListener<any>

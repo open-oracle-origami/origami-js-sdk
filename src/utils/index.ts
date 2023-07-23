@@ -1,6 +1,6 @@
 import { SyncOrAsyncFn } from '../types'
 
-export const now = () => Math.floor(Date.now() / 1000)
+export const now = (): number => Math.floor(Date.now() / 1000)
 
 export const poll = async (
   fn: SyncOrAsyncFn<any>,
