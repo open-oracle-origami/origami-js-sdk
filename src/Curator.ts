@@ -49,16 +49,16 @@ class Curator extends Run {
     if (workshops) this.workshops = workshops
   }
 
-  plan(C: Resource | IResource, config?: object): this
-  plan(C: new (config: object) => Resource, config: object): this
-  plan(C: (config: object) => Resource | IResource, config: object): this
+  plan(C: Resource | IResource, ...rest: any[]): this
+  plan(C: new (...args: any[]) => Resource, ...rest: any[]): this
+  plan(C: (...args: any[]) => Resource | IResource, ...rest: any[]): this
   plan(
     C:
       | Resource
       | IResource
-      | (new (config: object) => Resource)
-      | ((config: object) => Resource | IResource),
-    config: object | undefined
+      | (new (...args: any[]) => Resource)
+      | ((...args: any[]) => Resource | IResource),
+    ...rest: any[]
   ): this {
     let c: IResource
 
@@ -66,6 +66,7 @@ class Curator extends Run {
       c = C as IResource
       c.assign(this)
     } else {
+      const config = rest[0] ?? {}
       const nextConfig = { emitter: this.emitter, ...config }
 
       try {
