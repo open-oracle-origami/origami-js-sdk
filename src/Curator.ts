@@ -49,30 +49,31 @@ class Curator extends Run {
     if (workshops) this.workshops = workshops
   }
 
-  plan(C: IResource, config?: object): this
+  plan(C: Resource | IResource, config?: object): this
   plan(C: new (config: object) => Resource, config: object): this
-  plan(C: (config: object) => Resource, config: object): this
+  plan(C: (config: object) => Resource | IResource, config: object): this
   plan(
     C:
+      | Resource
       | IResource
       | (new (config: object) => Resource)
-      | ((config: object) => Resource),
+      | ((config: object) => Resource | IResource),
     config: object | undefined
   ): this {
     let c: IResource
 
     if ('id' in C) {
-      c = C
+      c = C as IResource
       c.assign(this)
     } else {
       const nextConfig = { emitter: this.emitter, ...config }
 
       try {
         // @ts-ignore
-        c = new C(nextConfig)
+        c = new C(nextConfig) as IResource
       } catch {
         // @ts-ignore
-        c = C(nextConfig)
+        c = C(nextConfig) as IResource
       }
     }
 
