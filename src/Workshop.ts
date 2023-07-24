@@ -7,7 +7,7 @@ class Workshop extends Run implements IWorkshop {
   mills: string[] = []
   backlog: number = 10000
   stack: Paper[] = []
-  assemble?: (paper: Paper) => void
+  assemble?: (paper: Paper, workshop: IWorkshop) => void
   crease?: (paper: Paper) => Paper
 
   static create(config: WorkshopConfig): IWorkshop {
@@ -20,7 +20,7 @@ class Workshop extends Run implements IWorkshop {
         const creased = this.crease ? this.crease(paper) : paper
         const length = this.stack.unshift(creased)
         if (length > this.backlog) this.stack.pop()
-        if (this.assemble) this.assemble(creased)
+        if (this.assemble) this.assemble(creased, this)
       })
     })
 

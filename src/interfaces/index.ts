@@ -39,6 +39,6 @@ export interface IWorkshop extends IRun {
   backlog: number
   stack: Paper[]
   fold: (collection: string, assembly: Paper[], data: any) => this
-  assemble?: (paper: Paper) => void
+  assemble?: (paper: Paper, workshop: IWorkshop) => void
   crease?: (paper: Paper) => Paper
 }

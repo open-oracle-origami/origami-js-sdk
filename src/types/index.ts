@@ -40,7 +40,7 @@ export type MuseumConfig = RunConfig & {
 
 export type WorkshopConfig = RunConfig & {
   mills?: string[]
-  assemble?: (paper: Paper) => void
+  assemble?: (paper: Paper, workshop: IWorkshop) => void
   crease?: (paper: Paper) => Paper
   backlog?: number
 }
