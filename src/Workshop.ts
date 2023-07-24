@@ -4,7 +4,7 @@ import { IWorkshop } from './interfaces'
 import { now } from './utils'
 
 class Workshop extends Run implements IWorkshop {
-  mills: string[]
+  mills: string[] = []
   backlog: number = 10000
   stack: Paper[] = []
   assemble?: (mill: string, paper: Paper) => void
@@ -34,7 +34,7 @@ class Workshop extends Run implements IWorkshop {
     const { mills, assemble, crease, backlog } = config
     this.init ??= this.defaultInit
 
-    this.mills = mills
+    if (mills) this.mills = mills
     if (assemble) this.assemble = assemble
     if (crease) this.crease = crease
     if (backlog) this.backlog = backlog

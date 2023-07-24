@@ -6,6 +6,7 @@ class Curator extends Run {
   mills: IMill[] = []
   museums: IMuseum[] = []
   workshops: IWorkshop[] = []
+  autoAssign: boolean = true
 
   static create(config: CuratorConfig): Curator {
     return new this(config)
@@ -41,8 +42,9 @@ class Curator extends Run {
 
   constructor(config: CuratorConfig) {
     super({ ...config, id: `curator.${config.id.replace('curator.', '')}` })
-    const { mills, museums, workshops } = config
+    const { mills, museums, workshops, autoAssign = true } = config
     this.init ??= this.defaultInit
+    this.autoAssign = autoAssign
 
     if (mills) this.mills = mills
     if (museums) this.museums = museums
@@ -80,10 +82,14 @@ class Curator extends Run {
 
     if (c.id.includes('mill')) {
       this.mills.push(c as IMill)
+      if (this.autoAssign) this.workshops.forEach(w => w.mills.push(c.id))
     } else if (c.id.includes('museum')) {
       this.museums.push(c as IMuseum)
+      // listens to workshops
     } else if (c.id.includes('workshop')) {
       this.workshops.push(c as IWorkshop)
+      // listens to mills
+      // museum listens to this
     } else {
       throw new Error(`${c.id} is not a Mill, Museum, or Workshop`)
     }

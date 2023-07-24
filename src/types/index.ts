@@ -29,6 +29,7 @@ export type CuratorConfig = RunConfig & {
   mills?: IMill[]
   museums?: IMuseum[]
   workshops?: IWorkshop[]
+  autoAssign?: boolean
 }
 
 export type MillConfig = RunConfig
@@ -38,7 +39,7 @@ export type MuseumConfig = RunConfig & {
 }
 
 export type WorkshopConfig = RunConfig & {
-  mills: string[]
+  mills?: string[]
   assemble?: (mill: string, paper: Paper) => void
   crease?: (paper: Paper) => Paper
   backlog?: number
