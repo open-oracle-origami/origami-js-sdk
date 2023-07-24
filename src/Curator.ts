@@ -1,3 +1,5 @@
+import assert from 'node:assert'
+
 import Run from './Run'
 import { Resource, IResource, CuratorConfig, SyncOrAsyncFn } from './types'
 import { IMill, IMuseum, IWorkshop } from './interfaces'
@@ -62,6 +64,8 @@ class Curator extends Run {
       | ((...args: any[]) => Resource | IResource),
     ...rest: any[]
   ): this {
+    assert(!this.running, `${this.id} already started.`)
+
     let c: IResource
 
     if ('id' in C) {
@@ -73,28 +77,31 @@ class Curator extends Run {
 
       try {
         // @ts-ignore
-        c = new C(nextConfig) as IResource
+        c = new C(nextConfig)
       } catch {
         // @ts-ignore
-        c = C(nextConfig) as IResource
+        c = C(nextConfig)
       }
     }
 
     if (c.id.includes('mill')) {
-      this.mills.push(c as IMill)
+      c = c as IMill
+      this.mills.push(c)
       if (this.autoAssign) this.workshops.forEach(w => w.mills.push(c.id))
     } else if (c.id.includes('museum')) {
-      this.museums.push(c as IMuseum)
-      // listens to workshops
+      c = c as IMuseum
+      this.museums.push(c)
+      if (this.autoAssign) c.workshops = this.workshops.map(w => w.id)
     } else if (c.id.includes('workshop')) {
-      this.workshops.push(c as IWorkshop)
-      // listens to mills
-      // museum listens to this
+      c = c as IWorkshop
+      this.workshops.push(c)
+      if (this.autoAssign) {
+        c.mills = this.mills.map(m => m.id)
+        this.museums.forEach(m => m.workshops.push(c.id))
+      }
     } else {
       throw new Error(`${c.id} is not a Mill, Museum, or Workshop`)
     }
-
-    if (this.running && !c.running) void c.start()
 
     return this
   }
