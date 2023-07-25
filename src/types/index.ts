@@ -5,19 +5,13 @@ export type Resource = Mill | Museum | Workshop
 export type IResource = IMill | IMuseum | IWorkshop
 export type SubscriptionListener<T> = (topic: string, data?: T) => void
 
-export type SyncOrAsyncFn<ReturnType> =
-  | (() => Promise<ReturnType>)
-  | (() => ReturnType)
+export type SyncOrAsyncFn<ReturnType> = () => ReturnType | Promise<ReturnType>
 
-export type CallbackFn<ReturnType> =
-  | ((...args: any[]) => Promise<ReturnType>)
-  | ((...args: any[]) => ReturnType)
+export type CallbackFn<ReturnType> = (
+  ...args: any[]
+) => ReturnType | Promise<ReturnType>
 
 export type InitFn = CallbackFn<CallbackFn<void>>
-
-export type RunStartFn =
-  | ((listener?: SubscriptionListener<any>) => Promise<void>)
-  | ((listener?: SubscriptionListener<any>) => void)
 
 export type RunConfig = {
   id: string
@@ -36,6 +30,8 @@ export type MillConfig = RunConfig
 
 export type MuseumConfig = RunConfig & {
   workshops: string[]
+  certify?: (origami: Origami, museum: IMuseum) => boolean | Promise<boolean>
+  curate?: (origami: Origami, museum: IMuseum) => void | Promise<void>
 }
 
 export type WorkshopConfig = RunConfig & {

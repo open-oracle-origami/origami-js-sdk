@@ -4,8 +4,8 @@ import {
   SyncOrAsyncFn,
   InitFn,
   CallbackFn,
-  RunStartFn,
   RunConfig,
+  Origami,
 } from '../types'
 
 export interface IPubSub {
@@ -18,7 +18,7 @@ export interface IRun {
   readonly id: string
   readonly emitter: IPubSub
   running: boolean
-  start: RunStartFn
+  start: (listener?: SubscriptionListener<any>) => this | Promise<this>
   stop: SyncOrAsyncFn<this>
   assign: (object: RunConfig) => this
   init?: InitFn
@@ -32,6 +32,8 @@ export interface IMill extends IRun {
 
 export interface IMuseum extends IRun {
   workshops: string[]
+  certify?: (origami: Origami, museum: IMuseum) => boolean | Promise<boolean>
+  curate?: (origami: Origami, museum: IMuseum) => void | Promise<void>
 }
 
 export interface IWorkshop extends IRun {

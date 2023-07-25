@@ -4,16 +4,16 @@ import { IPubSub } from '../interfaces'
 import { SubscriptionListener } from '../types'
 
 export class MemoryAdapter implements IPubSub {
-  publish = (topic: string, data: any) => {
-    return PubSubJs.publish(topic, data)
+  publish = (topic: string, data: string | object) => {
+    PubSubJs.publish(topic, data)
   }
 
   subscribe = (topic: string, callback: SubscriptionListener<any>) => {
-    return PubSubJs.subscribe(topic, callback)
+    PubSubJs.subscribe(topic, callback)
   }
 
   unsubscribe = (topic: string) => {
-    return PubSubJs.unsubscribe(topic)
+    PubSubJs.unsubscribe(topic)
   }
 }
 
@@ -27,15 +27,15 @@ export class PubSub implements IPubSub {
   }
 
   publish = (topic: string, data: string | object) => {
-    return this.adapter.publish(topic, data)
+    this.adapter.publish(topic, data)
   }
 
   subscribe = (topic: string, callback: SubscriptionListener<any>) => {
-    return this.adapter.subscribe(topic, callback)
+    this.adapter.subscribe(topic, callback)
   }
 
   unsubscribe = (topic: string) => {
-    return this.adapter.unsubscribe(topic)
+    this.adapter.unsubscribe(topic)
   }
 }
 
