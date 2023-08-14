@@ -24,6 +24,7 @@ export interface IRun {
   init?: InitFn
   end?: CallbackFn<void>
   listener?: SubscriptionListener<any>
+  config?: object
 }
 
 export interface IMill extends IRun {

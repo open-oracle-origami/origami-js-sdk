@@ -17,6 +17,7 @@ export type RunConfig = {
   id: string
   emitter?: IPubSub
   init?: InitFn
+  config?: object
 }
 
 export type CuratorConfig = RunConfig & {

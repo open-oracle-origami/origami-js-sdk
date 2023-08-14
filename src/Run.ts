@@ -9,15 +9,17 @@ class Run implements IRun {
   init?: InitFn
   end?: CallbackFn<void>
   listener?: SubscriptionListener<any>
+  config?: object
 
   static create(config: RunConfig): IRun {
     return new this(config) as IRun
   }
 
-  constructor({ id, emitter = new PubSub(), init }: RunConfig) {
+  constructor({ id, emitter = new PubSub(), init, config = {} }: RunConfig) {
     this.id = id
     this.emitter = emitter
     this.init = init
+    this.config = config
   }
 
   start = async (listener?: SubscriptionListener<any>): Promise<this> => {
