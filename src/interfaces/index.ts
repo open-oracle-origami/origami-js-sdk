@@ -1,10 +1,11 @@
-import {
+import type {
   Paper,
   SubscriptionListener,
   SyncOrAsyncFn,
   InitFn,
   CallbackFn,
   RunConfig,
+  MonitorConfig,
   Origami,
 } from '../types'
 
@@ -16,11 +17,14 @@ export interface IPubSub {
 
 export interface IRun {
   readonly id: string
-  readonly emitter: IPubSub
+  emitter: IPubSub
+  monitor: MonitorConfig
   running: boolean
   start: (listener?: SubscriptionListener<any>) => this | Promise<this>
   stop: SyncOrAsyncFn<this>
-  assign: (object: RunConfig) => this
+  assign: (config: RunConfig) => this
+  startMonitor: SyncOrAsyncFn<this>
+  stopMonitor: SyncOrAsyncFn<this>
   init?: InitFn
   end?: CallbackFn<void>
   listener?: SubscriptionListener<any>

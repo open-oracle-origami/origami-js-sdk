@@ -1,5 +1,8 @@
+import type { Server } from 'node:http'
+import type { Registry } from 'prom-client'
+
 import { Mill, Museum, Workshop } from '../'
-import { IMill, IMuseum, IWorkshop, IPubSub } from '../interfaces'
+import type { IMill, IMuseum, IWorkshop, IPubSub } from '../interfaces'
 
 export type Resource = Mill | Museum | Workshop
 export type IResource = IMill | IMuseum | IWorkshop
@@ -13,9 +16,16 @@ export type CallbackFn<ReturnType> = (
 
 export type InitFn = CallbackFn<CallbackFn<void>>
 
+export type MonitorConfig = {
+  registry?: Registry
+  server?: Server
+  port?: number
+}
+
 export type RunConfig = {
   id: string
   emitter?: IPubSub
+  monitor?: MonitorConfig
   init?: InitFn
   config?: object
 }

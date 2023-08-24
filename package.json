@@ -103,6 +103,7 @@
     ]
   },
   "dependencies": {
+    "prom-client": "^14.2.0",
     "pubsub-js": "^1.9.4"
   },
   "devDependencies": {

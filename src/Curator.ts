@@ -73,7 +73,11 @@ class Curator extends Run {
       c.assign(this)
     } else {
       const config = rest[0] ?? {}
-      const nextConfig = { emitter: this.emitter, ...config }
+      const nextConfig = {
+        emitter: this.emitter,
+        monitor: this.monitor,
+        ...config,
+      }
 
       try {
         // @ts-ignore
